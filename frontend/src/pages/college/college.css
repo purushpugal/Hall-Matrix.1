@@ -1,0 +1,244 @@
+/* ── Variables ── */
+:root {
+  --ca-sidebar-w:       240px;
+  --ca-sidebar-col:     62px;
+  --ca-sidebar-bg:      #0f4c35;
+  --ca-sidebar-hover:   rgba(255,255,255,0.08);
+  --ca-sidebar-active:  #1a7a52;
+  --ca-sub-bg:          rgba(0,0,0,0.18);
+  --ca-sub2-bg:         rgba(0,0,0,0.22);
+  --ca-text:            rgba(255,255,255,0.72);
+  --ca-text-active:     #fff;
+  --ca-topbar-h:        58px;
+  --ca-bg:              #f0f4f2;
+}
+
+/* ── Wrapper ── */
+.ca-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ca-bg);
+}
+
+/* ── Sidebar ── */
+.ca-sidebar {
+  width: var(--ca-sidebar-w);
+  min-height: 100vh;
+  background: var(--ca-sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.25s ease;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 200;
+}
+.ca-sidebar.collapsed { width: var(--ca-sidebar-col); }
+
+/* Brand */
+.ca-brand {
+  display: flex;
+  align-items: center;
+  padding: 16px 14px 14px;
+  color: #fff;
+  font-size: 1.05rem;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+  white-space: nowrap;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* College badge */
+.ca-college-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 10px 4px;
+  padding: 9px 11px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 9px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.ca-college-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.ca-college-info { overflow: hidden; }
+.ca-college-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ca-college-sub { font-size: 0.68rem; color: rgba(255,255,255,0.5); }
+
+/* Nav scroll area */
+.ca-nav {
+  flex: 1;
+  padding: 8px 0 4px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.ca-nav::-webkit-scrollbar { width: 4px; }
+.ca-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+/* Nav items */
+.ca-nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 9px 14px;
+  color: var(--ca-text);
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 0.86rem;
+  border-radius: 7px;
+  margin: 1px 7px;
+  width: calc(100% - 14px);
+  transition: background 0.14s, color 0.14s;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: left;
+}
+.ca-nav-item i { font-size: 0.95rem; flex-shrink: 0; width: 18px; }
+.nav-label { margin-left: 10px; }
+.ca-nav-item:hover  { background: var(--ca-sidebar-hover); color: var(--ca-text-active); }
+.ca-nav-item.active { background: var(--ca-sidebar-active); color: var(--ca-text-active); }
+
+/* Depth indentation */
+.ca-nav-item.depth-1 { padding-left: 18px; font-size: 0.83rem; }
+.ca-nav-item.depth-2 { padding-left: 28px; font-size: 0.81rem; }
+
+/* Sub-menu containers */
+.ca-sub-menu { overflow: hidden; }
+
+/* Parent toggle arrow */
+.nav-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+  color: rgba(255,255,255,0.35);
+}
+.nav-arrow.rotated { transform: rotate(90deg); color: rgba(255,255,255,0.65); }
+.ca-nav-parent.parent-open { color: var(--ca-text-active); }
+
+/* Depth-1 sub menu background */
+.ca-nav-item.depth-1 { background-color: rgba(0,0,0,0.12); }
+.ca-nav-item.depth-1:hover { background-color: var(--ca-sidebar-hover); }
+.ca-nav-item.depth-1.active { background-color: var(--ca-sidebar-active); }
+
+/* Depth-2 (Settings sub-items) */
+.ca-nav-item.depth-2 { background-color: rgba(0,0,0,0.2); }
+.ca-nav-item.depth-2:hover { background-color: var(--ca-sidebar-hover); }
+.ca-nav-item.depth-2.active { background-color: var(--ca-sidebar-active); }
+
+/* Logout button */
+.ca-logout-btn { color: rgba(255, 130, 130, 0.8) !important; }
+.ca-logout-btn:hover { background: rgba(220,53,69,0.15) !important; color: #ff6b6b !important; }
+
+/* Sidebar footer */
+.ca-sidebar-footer {
+  padding: 8px 0 10px;
+  border-top: 1px solid rgba(255,255,255,0.09);
+  flex-shrink: 0;
+}
+
+/* ── Main area ── */
+.ca-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Topbar */
+.ca-topbar {
+  height: var(--ca-topbar-h);
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* Avatar */
+.ca-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #1a7a52;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Content area */
+.ca-content {
+  flex: 1;
+  padding: 26px;
+  overflow-y: auto;
+}
+
+/* ── Cards ── */
+.ca-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ca-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.ca-stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
+/* ── Table ── */
+.ca-table thead th {
+  background: #f6faf8;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 14px;
+}
+.ca-table td { padding: 11px 14px; vertical-align: middle; font-size: 0.88rem; }
+
+/* ── Page header shared ── */
+.ca-page-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.ca-page-header h5 { font-weight: 700; margin-bottom: 2px; }
+.ca-breadcrumb { font-size: 0.8rem; color: #9ca3af; }
+.ca-breadcrumb span { color: #1a7a52; font-weight: 500; }
