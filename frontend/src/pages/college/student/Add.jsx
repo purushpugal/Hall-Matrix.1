@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, Form, Button, Row, Col, Alert, InputGroup, Spinner, Image } from 'react-bootstrap'
 import { useCollegeSettings } from '../../../context/CollegeSettingsContext'
@@ -6,12 +6,23 @@ import api from '../../../api/axios'
 
 const initial = {
   name: '', phone: '', email: '', password: '',
-  register_no: '', degree_id: '', department_id: '', batch_id: '',
+  register_no: '', degree_id: '', department_id: '', batch_id: '', tutor_id: '',
 }
 
 export default function StudentAdd() {
   const navigate = useNavigate()
   const { degrees, departments, batches } = useCollegeSettings()
+  
+  const [tutors, setTutors] = useState([])
+
+  useEffect(() => {
+    api.get('/employees')
+      .then(res => {
+        const t = res.data.employees.filter(e => e.role === 'tutor')
+        setTutors(t)
+      })
+      .catch(() => {})
+  }, [])
 
   const [form, setForm]         = useState(initial)
   const [photo, setPhoto]       = useState(null)
@@ -226,6 +237,15 @@ export default function StudentAdd() {
                   </Form.Select>
                   <Form.Control.Feedback type="invalid">{errors.batch_id}</Form.Control.Feedback>
                   {batches.length === 0 && <div className="form-text text-warning small">No batches set up yet — add one under Settings &rsaquo; Batch.</div>}
+                </Form.Group>
+
+                <Form.Group className="mb-4">
+                  <Form.Label className="small fw-semibold">Assign Tutor (Optional)</Form.Label>
+                  <Form.Select name="tutor_id" value={form.tutor_id} onChange={handleChange} isInvalid={!!errors.tutor_id}>
+                    <option value="">-- Select Tutor --</option>
+                    {tutors.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">{errors.tutor_id}</Form.Control.Feedback>
                 </Form.Group>
 
                 <Button type="submit" variant="success" className="w-100" disabled={submitting}>

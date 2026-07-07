@@ -37,6 +37,15 @@ import ExamAdd          from './pages/college/exam/Add'
 import ExamList         from './pages/college/exam/List'
 import Reports          from './pages/college/Reports'
 
+// ── Tutor ─────────────────────────────────────────────────────────────────────
+import TutorLayout      from './pages/tutor/Layout'
+import TutorDashboard   from './pages/tutor/Dashboard'
+import TutorStudentView from './pages/tutor/student/View'
+
+// ── Student ───────────────────────────────────────────────────────────────────
+import StudentLayout    from './pages/student/Layout'
+import StudentDashboard from './pages/student/Dashboard'
+
 import './App.css'
 
 function LandingPage() {
@@ -111,6 +120,25 @@ export default function App() {
 
             {/* Reports */}
             <Route path="reports"                      element={<Reports />} />
+          </Route>
+
+          {/* Tutor */}
+          <Route
+            path="/tutor"
+            element={<ProtectedRoute role="tutor"><TutorLayout /></ProtectedRoute>}
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<TutorDashboard />} />
+            <Route path="student/view/:id" element={<TutorStudentView />} />
+          </Route>
+
+          {/* Student */}
+          <Route
+            path="/student"
+            element={<ProtectedRoute role="student"><StudentLayout /></ProtectedRoute>}
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<StudentDashboard />} />
           </Route>
         </Routes>
       </AuthProvider>

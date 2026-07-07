@@ -8,12 +8,18 @@ class Student extends Model
 {
     protected $fillable = [
         'user_id', 'college_id', 'degree_id', 'department_id', 'batch_id',
-        'register_no', 'phone', 'profile_photo',
+        'tutor_id', 'register_no', 'phone', 'profile_photo',
+        'gender', 'dob', 'roll_no',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tutor()
+    {
+        return $this->belongsTo(User::class, 'tutor_id');
     }
 
     public function college()

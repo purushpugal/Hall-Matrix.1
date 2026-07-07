@@ -24,6 +24,10 @@ class CollegeController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->has('email')) {
+            $request->merge(['email' => strtolower(trim($request->email))]);
+        }
+
         $data = $request->validate([
             'college_name'    => 'required|string|max:255',
             'college_code'    => 'required|string|max:50|unique:colleges,college_code',

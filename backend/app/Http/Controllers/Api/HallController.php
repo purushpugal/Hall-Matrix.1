@@ -59,7 +59,7 @@ class HallController extends Controller
     private function collegeId(Request $request): int
     {
         $user = $request->user();
-        abort_unless($user?->role === 'college_admin' && $user->college_id, 403, 'Unauthorized.');
+        abort_unless(in_array($user?->role, ['college_admin', 'admin_employee']) && $user->college_id, 403, 'Unauthorized.');
         return $user->college_id;
     }
 }

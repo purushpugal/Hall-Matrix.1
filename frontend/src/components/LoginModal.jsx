@@ -5,9 +5,9 @@ import { useAuth } from '../context/AuthContext'
 
 const ROLE_ROUTES = {
   super_admin:    '/super-admin/dashboard',
-  admin_employee: '/super-admin/dashboard',
+  admin_employee: '/college/dashboard',
   college_admin:  '/college/dashboard',
-  tutor:          '/college/dashboard',
+  tutor:          '/tutor/dashboard',
   student:        '/student/dashboard',
 }
 

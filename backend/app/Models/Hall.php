@@ -13,6 +13,8 @@ class Hall extends Model
         'rows',
         'cols',
         'is_active',
+        'block_name',
+        'description',
     ];
 
     public function college()

@@ -12,6 +12,7 @@ class College extends Model
     protected $fillable = [
         'college_name', 'college_code', 'location', 'contact_person',
         'contact_number', 'email', 'password', 'is_active',
+        'website', 'address',
     ];
 
     protected $hidden = ['password'];
